@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="media"
+            type="id.forum.core.media.domain.model.Image" />
+
+        <variable
+            name="listener"
+            type="id.forum.gallery.presentation.GalleryAdapter.GalleryAdapterListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{(v) -> listener.onImageClicked(v, media)}"
+        app:cardCornerRadius="8dp">
+
+        <ImageView
+            android:id="@+id/iv_thread_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:setImagePath="@{media.path}" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#40000000"
+            android:padding="@dimen/grid_4"
+            android:src="@drawable/ic_check_gallery"
+            android:visibility="@{media.selected? View.VISIBLE : View.GONE}" />
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

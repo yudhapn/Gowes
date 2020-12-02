@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Gowes.iml" filepath="$PROJECT_DIR$/.idea/modules/Gowes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Gowes.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Gowes.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bookmark/Gowes.bookmark.iml" filepath="$PROJECT_DIR$/.idea/modules/bookmark/Gowes.bookmark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/chat/Gowes.chat.iml" filepath="$PROJECT_DIR$/.idea/modules/chat/Gowes.chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/community/Gowes.community.iml" filepath="$PROJECT_DIR$/.idea/modules/community/Gowes.community.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/Gowes.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/Gowes.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/explore/Gowes.explore.iml" filepath="$PROJECT_DIR$/.idea/modules/explore/Gowes.explore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/faq/Gowes.faq.iml" filepath="$PROJECT_DIR$/.idea/modules/faq/Gowes.faq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/feed/Gowes.feed.iml" filepath="$PROJECT_DIR$/.idea/modules/feed/Gowes.feed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gallery/Gowes.gallery.iml" filepath="$PROJECT_DIR$/.idea/modules/gallery/Gowes.gallery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/login/Gowes.login.iml" filepath="$PROJECT_DIR$/.idea/modules/login/Gowes.login.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mediapreviewer/Gowes.mediapreviewer.iml" filepath="$PROJECT_DIR$/.idea/modules/mediapreviewer/Gowes.mediapreviewer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/member/Gowes.member.iml" filepath="$PROJECT_DIR$/.idea/modules/member/Gowes.member.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification/Gowes.notification.iml" filepath="$PROJECT_DIR$/.idea/modules/notification/Gowes.notification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/post/Gowes.post.iml" filepath="$PROJECT_DIR$/.idea/modules/post/Gowes.post.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/profile/Gowes.profile.iml" filepath="$PROJECT_DIR$/.idea/modules/profile/Gowes.profile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/register/Gowes.register.iml" filepath="$PROJECT_DIR$/.idea/modules/register/Gowes.register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/search/Gowes.search.iml" filepath="$PROJECT_DIR$/.idea/modules/search/Gowes.search.iml" />
+    </modules>
+  </component>
+</project>

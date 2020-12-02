@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="chatViewModel"
+            type="id.forum.chat.presentation.ChatViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:refreshing="@{chatViewModel.chatsLiveData.status == Status.LOADING}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                layout="@layout/error_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="@{chatViewModel.chatsLiveData.status == Status.SUCCESS &amp;&amp;chatViewModel.chatsLiveData.data.size() == 0? View.VISIBLE : View.GONE}"
+                app:icon="@{@drawable/ic_twotone_chat}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@{`No chats`}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/grid_0_25"
+                android:paddingBottom="@dimen/bottom_app_bar_height"
+                app:chatsData="@{chatViewModel.chatsLiveData.data}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:paddingBottomSystemWindowInsets="@{true}"
+                app:paddingTopSystemWindowInsets="@{true}"
+                tools:listitem="@layout/item_list_chat_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

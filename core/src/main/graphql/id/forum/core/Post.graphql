@@ -1,0 +1,195 @@
+query explorePosts($date: String!) {
+    getExplorePostPaginationQueryResolver(input: {dateQuery: $date}) {
+        ... PostDetails
+    }
+}
+
+query postsByCommunitiesId ($communityids: [ObjectId]) {
+    posts(query: {community: {_id_in : $communityids}}, sortBy: CREATEDON_DESC) {
+        ... PostDetails
+    }
+}
+
+query searchPosts($keyword: String!) {
+    searchPostQuery(input: {postQuery: $keyword}) {
+        ... PostDetails
+    }
+}
+
+query bookmarkedPostsByUserId ($userId: ObjectId) {
+    bookmarks(query: {user: $userId}, sortBy: BOOKMARKEDON_DESC) {
+        ... BookmarkDetails
+    }
+}
+
+query postsByOwnerId ($userId: ObjectId) {
+    posts(query: {user: {_id : $userId}}) {
+        ... PostDetails
+    }
+}
+
+query comments ($postId: ObjectId, $sortBy: CommentSortByInput) {
+    post(query: {_id: $postId}) {
+        ... PostDetails
+    }
+    comments(query: {post: $postId}, sortBy: $sortBy) {
+        ... CommentDetails
+    }
+}
+
+mutation createPost($post: PostInsertInput!) {
+    insertOnePost(data: $post){
+        ... PostDetails
+    }
+}
+
+mutation updatePost($postId: ObjectId, $post: PostUpdateInput!) {
+    updateOnePost(query: {_id: $postId}, set: $post){
+        ... PostDetails
+    }
+}
+
+mutation insertPostVote($vote: PostVoteInsertInput!){
+    insertOnePostVote(data: $vote) {
+        _id
+        upVote
+    }
+}
+
+
+mutation insertComment($comment: CommentInsertInput!) {
+    insertCommentIncreaseCounterMutation(input: $comment){
+        ... CommentDetails
+    }
+}
+
+mutation deleteComment($commentId: ObjectId, $postId: ObjectId) {
+    deleteCommentDecreaseCounterMutation(input: {_id: $commentId, post: $postId}) {
+        _id
+    }
+}
+
+mutation deletePost($postId: ObjectId) {
+    deleteOnePost(query: {_id: $postId}) {
+        _id
+    }
+}
+
+mutation insertBookmarkPost($bookmark: BookmarkInsertInput!) {
+    insertOneBookmark(data: $bookmark) {
+        _id
+    }
+}
+
+mutation deleteBookmarkPost($postId: ObjectId, $userId: ObjectId) {
+    deleteOneBookmark(query: {post: {_id: $postId}, user: $userId}) {
+        _id
+    }
+}
+
+mutation votePost($userId: ObjectId, $postId: ObjectId, $vote: PostVoteInsertInput!) {
+    upsertOnePostVote(query: {user: $userId, post: $postId}, data: $vote) {
+        _id
+        post
+        user
+        upVote
+        isDelete
+        votedOn
+    }
+}
+
+mutation voteComment($userId: ObjectId, $commentId: ObjectId, $vote: CommentVoteInsertInput!) {
+    upsertOneCommentVote(query: {user: $userId, comment: $commentId}, data: $vote) {
+        _id
+        comment
+        user
+        upVote
+        isDelete
+        votedOn
+    }
+}
+
+fragment PostDetails on Post{
+    _id
+    title
+    content
+    attachments {
+        downloadUrl
+        contentDesc
+    }
+    community {
+        _id
+        name
+        avatar
+    }
+    user{
+        _id
+        username
+        avatar
+    }
+    createdOn
+    updatedOn
+    commentCount
+    voteCount
+}
+
+fragment CommentDetails on Comment{
+    _id
+    content
+    user {
+        _id
+        username
+        name
+        avatar
+    }
+    createdOn
+    updatedOn
+    voteCount
+}
+
+fragment BookmarkDetails on Bookmark{
+    _id
+    post{
+        _id
+        title
+        content
+        attachments {
+            downloadUrl
+            contentDesc
+        }
+        community {
+            _id
+            name
+            avatar
+        }
+        user{
+            _id
+            username
+            avatar
+        }
+        createdOn
+        updatedOn
+        commentCount
+        voteCount
+    }
+    bookmarkedOn
+}
+
+fragment PostVoteDetails on PostVote{
+    _id
+    post
+    user
+    upVote
+    isDelete
+    votedOn
+}
+
+
+fragment CommentVoteDetails on CommentVote{
+    _id
+    comment
+    user
+    upVote
+    isDelete
+    votedOn
+}

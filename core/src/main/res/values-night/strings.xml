@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="top_comment">Top Comment</string>
+    <string name="search_hint">Search Community</string>
+    <string name="community_tab">Community</string>
+    <string name="post_tab">Post</string>
+    <string name="province">Province</string>
+    <string name="city">City</string>
+</resources>

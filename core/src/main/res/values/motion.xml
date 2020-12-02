@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--Motion-->
+
+    <integer name="gowes_motion_default_very_large">900</integer>
+    <integer name="gowes_motion_default_large">300</integer>
+    <integer name="gowes_motion_duration_medium">225</integer>
+    <integer name="gowes_motion_duration_small">175</integer>
+
+</resources>

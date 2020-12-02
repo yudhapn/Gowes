@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="id.forum.core.post.presentation.PostAttachmentAdapter.AttachmentAdapterListener" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="postAttachments"
+            type="id.forum.core.post.domain.model.AttachmentList" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/sender_profile_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="@dimen/grid_0_25"
+        android:layout_marginHorizontal="@dimen/grid_0_125"
+        android:onClick="@{(view) -> listener.onImageClicked(view, postAttachments, position)}"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/attachment_image_view"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@{postAttachments.attachments.get(position).contentDesc}"
+            app:glideCenterCrop2="@{true}"
+            app:glideSrc2="@{postAttachments.attachments.get(position).url}"
+            app:shapeAppearance="?attr/shapeAppearanceLargeComponent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.PreviewAttachment.End" />
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

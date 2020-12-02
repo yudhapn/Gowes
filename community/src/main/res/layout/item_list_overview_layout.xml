@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="user"
+            type="id.forum.core.user.domain.model.User" />
+
+        <variable
+            name="listener"
+            type="id.forum.community.presentation.member.MemberOverviewAdapter.MemberAdapterListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/community_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:elevation="@dimen/plane_00"
+            android:focusable="true"
+            android:onClick="@{(view) -> listener.onMemberClicked(view, user)}"
+            app:cardCornerRadius="@dimen/profile_image_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/profile_image_size"
+                android:layout_height="@dimen/profile_image_size"
+                app:glideCircularCrop2="@{true}"
+                app:glideSrc2="@{user.profile.avatar}"
+                tools:src="@drawable/avatar_0" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/grid_0_25"
+            android:text="@{`@` + user.userName}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Gowes.Body3"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/community_image_view"
+            app:layout_constraintStart_toStartOf="@id/community_image_view"
+            app:layout_constraintTop_toBottomOf="@id/community_image_view"
+            tools:text="\@borax" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

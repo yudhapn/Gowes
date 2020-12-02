@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Final, top-level theme-->
+    <style name="Theme.Gowes.DayNight" parent="Theme.Gowes.Dark"/>
+
+    <style name="Theme.Gowes.Dark" parent="Theme.Gowes">
+        <!--Color-->
+        <item name="colorPrimary">@color/gowes_blue_200</item>
+        <item name="colorPrimaryVariant">@color/gowes_blue_300</item>
+        <item name="colorSecondary">@color/gowes_orange_300</item>
+        <item name="colorSecondaryVariant">@color/gowes_orange_300</item>
+
+        <item name="android:colorBackground">@color/gowes_black_900</item>
+        <item name="colorSurface">@color/gowes_black_800</item>
+        <item name="colorPrimarySurfaceVariant">?attr/colorSurface</item>
+        <item name="colorError">@color/gowes_red_600</item>
+
+        <item name="colorOnPrimary">@color/gowes_black_900</item>
+        <item name="colorOnSecondary">@color/gowes_black_900</item>
+        <item name="colorOnBackground">@color/gowes_white_50</item>
+        <item name="colorOnSurface">@color/gowes_white_50</item>
+        <item name="colorOnError">@color/gowes_black_900</item>
+
+        <item name="textAppearanceButton">@style/TextAppearance.Gowes.Button</item>
+
+
+        <item name="scrimBackground">@color/gowes_black_900_alpha_087</item>
+        <item name="android:statusBarColor">@color/gowes_black_900_alpha_060</item>
+
+        <item name="elevationOverlayEnabled">true</item>
+
+        <!--System/Platform attributes-->
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+    </style>
+
+</resources>

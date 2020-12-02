@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="C:/Gradle/gradle-6.5" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/bookmark" />
+            <option value="$PROJECT_DIR$/chat" />
+            <option value="$PROJECT_DIR$/community" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/explore" />
+            <option value="$PROJECT_DIR$/faq" />
+            <option value="$PROJECT_DIR$/feed" />
+            <option value="$PROJECT_DIR$/gallery" />
+            <option value="$PROJECT_DIR$/login" />
+            <option value="$PROJECT_DIR$/mediapreviewer" />
+            <option value="$PROJECT_DIR$/member" />
+            <option value="$PROJECT_DIR$/notification" />
+            <option value="$PROJECT_DIR$/post" />
+            <option value="$PROJECT_DIR$/profile" />
+            <option value="$PROJECT_DIR$/register" />
+            <option value="$PROJECT_DIR$/search" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

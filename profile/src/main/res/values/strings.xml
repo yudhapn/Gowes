@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="save">Save</string>
+    <string name="edit_profile">Edit your profile</string>
+    <string name="email_sender_profile_content_desc">Profile image of sender</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="name">Name</string>
+    <string name="biodata">Biodata</string>
+</resources>

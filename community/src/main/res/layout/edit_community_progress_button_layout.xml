@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="progressBarVisible"
+            type="Boolean" />
+
+        <variable
+            name="enable"
+            type="Boolean" />
+
+        <variable
+            name="text"
+            type="String" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="@{enable}"
+        android:focusable="true"
+        app:cardBackgroundColor="?attr/colorPrimary"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/grid_2">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="@dimen/grid_3"
+                android:layout_height="@dimen/grid_3"
+                android:layout_marginEnd="@dimen/grid_1"
+                android:indeterminateDrawable="@drawable/progress_bar_circle"
+                android:indeterminateDuration="@integer/gowes_motion_default_very_large"
+                android:max="100"
+                android:visibility="@{progressBarVisible? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_edit"
+                app:layout_constraintEnd_toStartOf="@id/tv_edit"
+                app:layout_constraintTop_toTopOf="@id/tv_edit" />
+
+            <TextView
+                android:id="@+id/tv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/grid_2_5"
+                android:text="@{text}"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="?attr/colorOnPrimary"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginStart="@dimen/grid_2_5"
+                tools:text="Login" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
+

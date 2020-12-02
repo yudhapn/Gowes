@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="community"
+            type="id.forum.core.community.domain.model.Community" />
+
+        <variable
+            name="response_type"
+            type="id.forum.core.data.Resource" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/post_nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/email_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/grid_0_5"
+            app:cardPreventCornerOverlap="false"
+            app:marginBottomSystemWindowInsets="@{true}"
+            app:marginTopSystemWindowInsets="@{true}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/navigation_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/grid_2"
+                    android:alpha="?attr/emphasisMediumAlpha"
+                    android:background="?attr/actionBarItemBackground"
+                    android:contentDescription="@string/navigate_back_icon_content_desc"
+                    android:padding="@dimen/grid_2"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_head"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_head"
+                    app:srcCompat="@drawable/ic_arrow_down" />
+
+
+                <TextView
+                    android:id="@+id/tv_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_2"
+                    android:text="@string/edit_community"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1" />
+
+                <TextView
+                    android:id="@+id/tv_sub_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_1"
+                    android:text="@string/sub_edit_community"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tv_head"
+                    app:layout_constraintTop_toBottomOf="@id/tv_head" />
+
+                <ImageView
+                    android:id="@+id/iv_community"
+                    android:layout_width="@dimen/setup_profile_image_size"
+                    android:layout_height="@dimen/setup_profile_image_size"
+                    android:layout_marginTop="@dimen/grid_2"
+                    android:contentDescription="@string/email_sender_profile_content_desc"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar_none"
+                    app:glideCircularCrop2="@{true}"
+                    app:glideSrc2="@{community.profile.avatar}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sub_head" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_choose"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_community"
+                    app:layout_constraintEnd_toEndOf="@id/iv_community"
+                    app:layout_constraintStart_toEndOf="@id/iv_community">
+
+                    <ImageView
+                        android:id="@+id/attachment_image_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/colorPrimary"
+                        android:padding="@dimen/grid_1"
+                        app:srcCompat="@drawable/ic_camera" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/grid_2"
+                    android:layout_marginTop="@dimen/grid_4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_community">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_full"
+                        android:hint="@string/name"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="15"
+                        android:text="@{community.profile.name}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_bio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_1"
+                    app:layout_constraintEnd_toEndOf="@+id/til_name"
+                    app:layout_constraintStart_toStartOf="@+id/til_name"
+                    app:layout_constraintTop_toBottomOf="@+id/til_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_bio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_full"
+                        android:gravity="top|start"
+                        android:hint="@string/biodata"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:lines="2"
+                        android:text="@{community.profile.biodata}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_1"
+                    android:layout_marginEnd="@dimen/grid_0_5"
+                    app:layout_constraintEnd_toStartOf="@+id/til_province"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="@+id/til_bio"
+                    app:layout_constraintTop_toBottomOf="@+id/til_bio">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_full"
+                        android:gravity="top|start"
+                        android:hint="@string/city"
+                        android:inputType="textCapSentences|text"
+                        android:text="@{community.address.city}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_province"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/grid_0_5"
+                    android:layout_marginTop="@dimen/grid_1"
+                    app:layout_constraintEnd_toEndOf="@id/til_bio"
+                    app:layout_constraintStart_toEndOf="@+id/til_city"
+                    app:layout_constraintTop_toBottomOf="@+id/til_bio">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_province"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_full"
+                        android:gravity="top|start"
+                        android:hint="@string/province"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapSentences|text"
+                        android:text="@{community.address.province}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_question"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_1"
+                    android:visibility="@{community.private ? View.VISIBLE :View.GONE}"
+                    app:layout_constraintEnd_toEndOf="@+id/til_province"
+                    app:layout_constraintStart_toStartOf="@+id/til_city"
+                    app:layout_constraintTop_toBottomOf="@+id/til_city">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_full"
+                        android:gravity="top|start"
+                        android:hint="@string/survey_question"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:lines="2"
+                        android:text="@{community.surveyQuestion}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_1"
+                    android:checked="@{community.private}"
+                    android:text="@string/private_community"
+                    app:layout_constraintStart_toStartOf="@id/til_city"
+                    app:layout_constraintTop_toBottomOf="@id/til_question"
+                    app:thumbTint="?attr/colorPrimary" />
+
+                <include
+                    android:id="@+id/btn_save"
+                    layout="@layout/edit_community_progress_button_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_2"
+                    app:enable="@{!(response_type.status == Status.LOADING)}"
+                    app:layout_constraintEnd_toEndOf="@+id/til_province"
+                    app:layout_constraintStart_toStartOf="@+id/til_city"
+                    app:layout_constraintTop_toBottomOf="@+id/switch_private"
+                    app:progressBarVisible="@{response_type.status == Status.LOADING}"
+                    app:text="@{`Save`}" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
+</layout>

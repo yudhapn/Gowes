@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="id.forum.core.data.Status" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="id.forum.community.presentation.CommunityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="@{viewModel.community.status == Status.ERROR ? View.INVISIBLE : View.VISIBLE}">
+
+        <ImageView
+            android:id="@+id/amount_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/background_red_circle"
+            android:textColor="#FDD835"
+            app:goneIf="@{viewModel.community.data.memberRequest.size() == 0 || (viewModel.community.data.memberRequest.size() != 0 &amp;&amp; !viewModel.isAdmin())}"
+            app:layout_constraintStart_toEndOf="@id/show_text_view"
+            app:layout_constraintTop_toTopOf="@id/show_text_view" />
+
+        <TextView
+            android:id="@+id/show_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/grid_2"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/show_all"
+            android:textAppearance="@style/TextAppearance.Gowes.Body2"
+            android:textColor="@color/text_selector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

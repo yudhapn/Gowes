@@ -1,0 +1,81 @@
+query Communities {
+    communitys(query: {isActive: true}) {
+        ... CommunityDetails
+    }
+}
+
+query Community($id: ObjectId) {
+    community(query:{_id: $id}){
+        ... CommunityDetails
+    }
+    members(query: {community: {_id: $id}}) {
+        ... CommunityMemberDetails
+    }
+    posts(query: {community: {_id : $id}}, sortBy: CREATEDON_DESC) {
+        ... PostDetails
+    }
+}
+
+query searchCommunities($keyword: String!) {
+    searchCommunityQuery(input: {communityQuery: $keyword}) {
+        ... CommunityDetails
+    }
+}
+
+
+query MembersByCommunityIds($communityIds: [ObjectId]) {
+    getUserListChatQuery(input: {community: {_id_in : $communityIds}}) {
+        ... CommunityMemberDetails
+    }
+}
+
+mutation UpdateCommunity($id: ObjectId, $community: CommunityUpdateInput!) {
+    updateOneCommunity(query: {_id: $id}, set: $community){
+        ... CommunityDetails
+    }
+}
+
+mutation CreateCommunity($community: CommunityInsertInput!) {
+    insertOneCommunity(data: $community){
+        ... CommunityDetails
+    }
+}
+
+mutation updateMember($communityId: ObjectId, $userId: ObjectId, $input: MemberInsertInput!) {
+    upsertOneMember(query: {community: {_id: $communityId}, user: {_id: $userId}}, data: $input) {
+        _id
+    }
+}
+
+mutation cancelRequestMember($communityId: ObjectId, $userId: ObjectId) {
+    deleteMemberCancelRequestMutation(input: {community: {_id: $communityId}, user: {_id: $userId}}) {
+        _id
+    }
+}
+
+fragment CommunityDetails on Community{
+    _id
+    name
+    biodata
+    avatar
+    city
+    province
+    isPrivate
+    memberCount
+    createdOn
+    surveyQuestion
+    type
+}
+
+fragment CommunityMemberDetails on Member {
+    user {
+        _id
+        avatar
+        name
+        username
+    }
+    isJoin
+    isRequest
+    isAdmin
+    surveyAnswer
+}

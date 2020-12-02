@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Gowes</string>
+    <string name="title_core">Core</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_feed">Feed</string>
+    <string name="title_login">Login</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_community">Community</string>
+    <string name="title_post">Post</string>
+    <string name="title_bookmark">Bookmark</string>
+    <string name="title_explore">explore</string>
+    <string name="title_member">Member</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_gallery">Gallery</string>
+    <string name="title_mediapreviewer">Media Previewer</string>
+    <string name="title_register">Register</string>
+    <string name="title_faq">Faq</string>
+    <string name="title_search">Search</string>
+    <string name="title_notification">Notification</string>
+    <string name="edit_community">Edit community</string>
+    <string name="sub_edit_community">Edit your community profile!</string>
+    <string name="sub_create_community">Register your bike community now!</string>
+    <string name="create_community">Create community</string>
+</resources>

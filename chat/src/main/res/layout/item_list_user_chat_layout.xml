@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="id.forum.core.user.domain.model.User" />
+
+        <variable
+            name="listener"
+            type="id.forum.chat.presentation.create.UserChatListAdapter.UserChatAdapterListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/grid_0_5"
+        android:layout_marginVertical="@dimen/grid_0_25"
+        android:clickable="true"
+        android:elevation="@dimen/plane_00"
+        android:focusable="true"
+        android:onClick="@{() -> listener.onUserClicked(user)}"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="@dimen/grid_1">
+
+            <ImageView
+                android:id="@+id/community_image_view"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:glideCircularCrop2="@{true}"
+                app:glideSrc2="@{user.profile.avatar}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/grid_1"
+                android:text="@{user.profile.name}"
+                android:textAppearance="@style/TextAppearance.Gowes.Body1"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/username_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/community_image_view"
+                app:layout_constraintTop_toTopOf="@+id/community_image_view"
+                tools:text="\Yudha Pratama" />
+
+            <TextView
+                android:id="@+id/username_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`@` + user.userName}"
+                android:textAppearance="@style/TextAppearance.Gowes.Body2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/name_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/name_text_view"
+                tools:text="\@y_pran" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

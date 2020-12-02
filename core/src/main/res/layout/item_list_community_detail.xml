@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="community"
+            type="id.forum.core.community.domain.model.Community" />
+
+        <variable
+            name="listener"
+            type="id.forum.core.community.presentation.CommunityAdapter.CommunityAdapterListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/grid_0_5"
+        android:layout_marginVertical="@dimen/grid_0_5"
+        android:clickable="true"
+        android:elevation="@dimen/plane_00"
+        android:focusable="true"
+        android:onClick="@{(view) -> listener.onCommunityClicked(view, community)}"
+        android:transitionName="@{@string/community_image_transition_name(community.id)}"
+        app:cardCornerRadius="@dimen/grid_0_5"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/private_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_1"
+                android:background="#99000000"
+                android:elevation="2dp"
+                android:paddingVertical="@dimen/grid_0_5"
+                android:text="@string/private_community"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Gowes.Body3"
+                android:textColor="@color/gowes_white_50"
+                android:textStyle="bold"
+                app:goneIf="@{!community.private}"
+                app:layout_constraintBottom_toBottomOf="@id/community_image_view"
+                app:layout_constraintEnd_toEndOf="@id/community_image_view"
+                app:layout_constraintStart_toStartOf="@id/community_image_view" />
+
+
+            <ImageView
+                android:id="@+id/community_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/poster_image_height_size"
+                app:glideCenterCrop2="@{true}"
+                app:glideSrc2="@{community.profile.avatar}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/avatar_0" />
+
+            <TextView
+                android:id="@+id/name_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/grid_1"
+                android:layout_marginTop="@dimen/grid_1"
+                android:text="@{community.profile.name}"
+                android:textAppearance="@style/TextAppearance.Gowes.Body2"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/community_image_view"
+                app:layout_constraintStart_toStartOf="@id/community_image_view"
+                app:layout_constraintTop_toBottomOf="@id/community_image_view"
+                tools:text="BMX Arek Malang" />
+            <!--            android:text="@{community.name.length() > 16? community.name.substring(0, 15) + `..` : community.name}"-->
+
+            <TextView
+                android:id="@+id/amount_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/grid_0_5"
+                android:layout_marginBottom="@dimen/grid_1"
+                android:drawableStart="@drawable/ic_community"
+                android:drawablePadding="@dimen/grid_0_5"
+                android:gravity="center_vertical"
+                android:text="@{community.memberCount + ` members`}"
+                android:textAppearance="@style/TextAppearance.Gowes.Body3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/community_image_view"
+                app:layout_constraintStart_toStartOf="@id/community_image_view"
+                app:layout_constraintTop_toBottomOf="@id/name_text_view"
+                tools:text="10 members" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

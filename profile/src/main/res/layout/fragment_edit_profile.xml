@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="user"
+            type="id.forum.core.user.domain.model.User" />
+
+        <variable
+            name="response_type"
+            type="id.forum.core.data.Resource" />
+    </data>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/post_nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/email_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/grid_0_5"
+            app:cardPreventCornerOverlap="false"
+            app:marginBottomSystemWindowInsets="@{true}"
+            app:marginTopSystemWindowInsets="@{true}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_profile"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1" />
+
+                <ImageView
+                    android:id="@+id/iv_user"
+                    android:layout_width="@dimen/setup_profile_image_size"
+                    android:layout_height="@dimen/setup_profile_image_size"
+                    android:layout_marginTop="@dimen/grid_2"
+                    android:contentDescription="@string/email_sender_profile_content_desc"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar_none"
+                    app:glideCircularCrop2="@{true}"
+                    app:glideSrc2="@{user.profile.avatar}"
+                    app:layout_constraintEnd_toEndOf="@id/tv_head"
+                    app:layout_constraintStart_toStartOf="@id/tv_head"
+                    app:layout_constraintTop_toBottomOf="@id/tv_head" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_choose"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_user"
+                    app:layout_constraintEnd_toEndOf="@id/iv_user"
+                    app:layout_constraintStart_toEndOf="@id/iv_user">
+
+                    <ImageView
+                        android:id="@+id/attachment_image_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00C853"
+                        android:padding="@dimen/grid_1"
+                        app:srcCompat="@drawable/ic_camera" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/grid_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_choose">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_full"
+                        android:hint="@string/name"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="15"
+                        android:text="@{user.profile.name}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_bio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_1"
+                    app:layout_constraintEnd_toEndOf="@+id/til_name"
+                    app:layout_constraintStart_toStartOf="@+id/til_name"
+                    app:layout_constraintTop_toBottomOf="@+id/til_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_bio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_corner_full"
+                        android:gravity="top|start"
+                        android:hint="@string/biodata"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapSentences|textMultiLine"
+                        android:lines="2"
+                        android:text="@{user.profile.biodata}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <include
+                    android:id="@+id/save_button"
+                    layout="@layout/profile_progress_button_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/grid_2"
+                    app:enable="@{!(response_type.status == Status.LOADING)}"
+                    app:layout_constraintEnd_toEndOf="@+id/til_bio"
+                    app:layout_constraintStart_toStartOf="@+id/til_bio"
+                    app:layout_constraintTop_toBottomOf="@+id/til_bio"
+                    app:progressBarVisible="@{response_type.status == Status.LOADING}"
+                    app:text="@{@string/save}" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
+</layout>

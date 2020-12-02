@@ -1,0 +1,17 @@
+query faqs {
+    faqTopics {
+        ... FaqTopicDetails
+    }
+}
+
+fragment FaqTopicDetails on FaqTopic{
+    _id
+    name
+    contents {
+        _id
+        title
+        question
+        answer
+    }
+    createdOn
+}

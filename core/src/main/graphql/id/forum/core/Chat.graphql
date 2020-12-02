@@ -1,0 +1,49 @@
+query chat($userId: ObjectId){
+    chats(query: {users_in: [{_id: $userId}]}) {
+        ... ChatDetails
+    }
+}
+
+query message($chatId: ObjectId){
+    messages(query: {chat: $chatId}) {
+        ... MessageDetails
+    }
+}
+
+mutation createChat($chat: ChatInsertInput!) {
+    insertOneChat(data: $chat){
+        ... ChatDetails
+    }
+}
+
+mutation createMessage($chatId: ObjectId!, $lastText: String!, $message: MessageInsertInput!) {
+    insertOneMessage(data: $message){
+        ... MessageDetails
+    }
+    updateOneChat(query: {_id: $chatId}, set: {lastText: $lastText}) {
+        ... ChatDetails
+    }
+}
+
+
+fragment ChatDetails on Chat{
+    _id
+    lastText
+    users {
+        _id
+        username
+        avatar
+    }
+}
+fragment MessageDetails on Message{
+    _id
+    user {
+        _id
+        username
+        name
+        avatar
+    }
+    content
+    attachment
+    sentOn
+}

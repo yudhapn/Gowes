@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Components-->
+
+    <style name="Widget.Gowes.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <!--Remove any scrim insets applied by NavigationView for system bars-->
+        <item name="insetForeground">@android:color/transparent</item>
+        <!--Set the background color of NavigationView-->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="itemTextAppearance">?attr/textAppearanceBody2</item>
+        <item name="itemTextColor">@color/color_on_surface_emphasis_medium</item>
+        <item name="itemIconTint">@color/color_on_surface_emphasis_medium</item>
+    </style>
+
+    <style name="Widget.Gowes.Chip.Entry" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="closeIconSize">0dp</item>
+        <item name="closeIconEnabled">false</item>
+        <item name="chipIcon">@drawable/avatar_none</item>
+        <item name="chipIconSize">@dimen/chip_icon_diameter</item>
+        <item name="chipStartPadding">0dp</item>
+        <item name="android:checkable">false</item>
+    </style>
+
+    <style name="CustomTabText" parent="TextAppearance.AppCompat.Widget.ActionMode.Title.Inverse">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.PreviewAttachment.Start" parent="">
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.PreviewAttachment.End" parent="">
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+    <style name="ShapeAppearanceOverlay.IconCircle" parent="">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+    <!--    <style name="CustomSplashTheme" parent="Theme.Gowes.DayNight">-->
+    <!--        <item name="android:windowNoTitle">true</item>-->
+    <!--        <item name="android:windowActionBar">false</item>-->
+    <!--        <item name="android:windowFullscreen">true</item>-->
+    <!--        <item name="android:windowContentOverlay">@null</item>-->
+    <!--    </style>-->
+    <!-- below one -->
+    <!--    <item name="android:windowBackground">@drawable/launch_screen</item>-->
+
+
+</resources>

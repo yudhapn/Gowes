@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Final, top-level theme-->
+    <style name="Theme.Gowes.DayNight" parent="Theme.Gowes" />
+
+    <style name="Theme.Gowes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--Color-->
+        <item name="colorPrimary">@color/gowes_blue_700</item>
+        <item name="colorPrimaryVariant">@color/gowes_blue_800</item>
+        <item name="colorSecondary">@color/gowes_orange_500</item>
+        <item name="colorSecondaryVariant">@color/gowes_orange_400</item>
+
+        <item name="android:colorBackground">@color/gowes_blue_50</item>
+        <item name="colorSurface">@color/gowes_white_50</item>
+        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
+        <item name="colorError">@color/gowes_red_600</item>
+
+        <item name="colorOnPrimary">@color/gowes_white_50</item>
+        <item name="colorOnSecondary">@color/gowes_black_900</item>
+        <item name="colorOnBackground">@color/gowes_black_900</item>
+        <item name="colorOnSurface">@color/gowes_black_900</item>
+        <item name="colorOnError">@color/gowes_black_900</item>
+
+        <item name="scrimBackground">@color/gowes_white_50_alpha_060</item>
+        <item name="android:statusBarColor">@color/gowes_blue_50_alpha_060</item>
+        <item name="android:navigationBarColor">@color/nav_bar</item>
+
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Gowes.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Gowes.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Gowes.LargeComponent
+        </item>
+
+        <!--Typography-->
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Gowes.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Gowes.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Gowes.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Gowes.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Gowes.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.Gowes.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.Gowes.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Gowes.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Gowes.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Reply.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Gowes.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.Gowes.Overline</item>
+
+        <item name="emphasisHighAlpha">0.87</item>
+        <item name="emphasisMediumAlpha">0.60</item>
+        <item name="emphasisDisabledAlpha">0.38</item>
+
+        <item name="motionInterpolatorPersistent">@android:interpolator/fast_out_slow_in</item>
+        <item name="motionInterpolatorIncoming">@android:interpolator/decelerate_cubic</item>
+        <item name="motionInterpolatorOutgoing">@android:interpolator/accelerate_cubic</item>
+
+        <!--Styles-->
+        <item name="bottomAppBarStyle">
+            @style/Widget.MaterialComponents.BottomAppBar.PrimarySurface
+        </item>
+        <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
+        <item name="navigationViewStyle">@style/Widget.Gowes.NavigationView</item>
+        <item name="chipStyle">@style/Widget.Gowes.Chip.Entry</item>
+
+        <item name="android:windowSoftInputMode">adjustPan</item>
+
+        <!--System/Platform attributes-->
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <style name="Theme.Splash" parent="Theme.Gowes">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+</resources>

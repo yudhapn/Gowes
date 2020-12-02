@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="currentUserId"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="id.forum.post.presentation.PostViewModel" />
+
+        <variable
+            name="post"
+            type="id.forum.core.post.domain.model.Post" />
+
+        <variable
+            name="listener"
+            type="id.forum.core.post.presentation.PostAdapter.PostAdapterListener" />
+    </data>
+    <!--    app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:refreshing="@{viewModel.comments.status == Status.LOADING}">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/post_nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <FrameLayout
+                android:id="@+id/email_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/grid_0_5"
+                android:background="?attr/colorSecondary"
+                app:marginBottomSystemWindowInsets="@{true}"
+                app:marginTopSystemWindowInsets="@{true}">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/email_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/bottom_app_bar_height"
+                    app:cardPreventCornerOverlap="false"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Gowes.MediumComponent.Marked">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/menu_item_constraint_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/grid_3"
+                        app:paddingBottomSystemWindowInsets="@{true}">
+
+                        <TextView
+                            android:id="@+id/subject_text_view"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/grid_2"
+                            android:layout_marginTop="@dimen/grid_1"
+                            android:layout_marginEnd="@dimen/grid_1"
+                            android:text="@{post.title}"
+                            android:textAppearance="?attr/textAppearanceHeadline5"
+                            app:layout_constraintEnd_toStartOf="@+id/navigation_icon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="High school reunion" />
+
+                        <ImageButton
+                            android:id="@+id/navigation_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="?attr/emphasisMediumAlpha"
+                            android:background="?attr/actionBarItemBackground"
+                            android:contentDescription="@string/navigate_back_icon_content_desc"
+                            android:padding="@dimen/grid_2"
+                            app:layout_constraintEnd_toEndOf="@+id/user_profile_image_view"
+                            app:layout_constraintStart_toStartOf="@+id/user_profile_image_view"
+                            app:layout_constraintTop_toTopOf="@+id/subject_text_view"
+                            app:srcCompat="@drawable/ic_arrow_down_post" />
+
+                        <TextView
+                            android:id="@+id/sender_text_view"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_1"
+                            android:layout_marginEnd="@dimen/grid_1"
+                            android:textAppearance="@style/TextAppearance.Gowes.Body3"
+                            app:layout_constraintEnd_toStartOf="@+id/user_profile_image_view"
+                            app:layout_constraintStart_toStartOf="@+id/subject_text_view"
+                            app:layout_constraintTop_toBottomOf="@+id/subject_text_view"
+                            app:setname="@{`@` + post.senderPreview}"
+                            app:settime="@{post.createdOn}"
+                            tools:text="Ali Connors -- 12m" />
+
+                        <ImageView
+                            android:id="@+id/community_poster_image_view"
+                            android:layout_width="@dimen/community_poster_image_size"
+                            android:layout_height="@dimen/community_poster_image_size"
+                            android:layout_marginStart="@dimen/grid_1"
+                            android:clickable="true"
+                            android:contentDescription="@string/email_sender_profile_content_desc"
+                            android:focusable="true"
+                            android:onClick="@{() -> listener.onCommunityClicked(post)}"
+                            app:glideCircularCrop2="@{true}"
+                            app:glideSrc2="@{post.community.profile.avatar}"
+                            app:layout_constraintBottom_toBottomOf="@+id/community_text_view"
+                            app:layout_constraintStart_toEndOf="@+id/community_text_view"
+                            app:layout_constraintTop_toTopOf="@+id/community_text_view" />
+
+
+                        <TextView
+                            android:id="@+id/community_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_1"
+                            android:text="@{`in ` + post.community.profile.name}"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            app:layout_constraintStart_toStartOf="@+id/sender_text_view"
+                            app:layout_constraintTop_toBottomOf="@+id/sender_text_view"
+                            tools:text="in BMX Malang Raya" />
+
+
+                        <ImageView
+                            android:id="@+id/user_profile_image_view"
+                            android:layout_width="@dimen/email_sender_profile_image_size"
+                            android:layout_height="@dimen/email_sender_profile_image_size"
+                            android:layout_marginEnd="@dimen/grid_2"
+                            android:contentDescription="@string/email_sender_profile_content_desc"
+                            android:onClick="@{() -> listener.onProfileClicked(post)}"
+                            android:scaleType="centerCrop"
+                            app:glideCircularCrop2="@{true}"
+                            app:glideSrc2="@{post.user.profile.avatar}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/sender_text_view" />
+
+                        <TextView
+                            android:id="@+id/body_text_view"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_2"
+                            android:text="@{post.content}"
+                            android:textAppearance="?attr/textAppearanceBody1"
+                            android:textIsSelectable="true"
+                            app:layout_constraintEnd_toEndOf="@+id/user_profile_image_view"
+                            app:layout_constraintStart_toStartOf="@+id/sender_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/attachment_recycler_view" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/attachment_recycler_view"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_1"
+                            android:overScrollMode="never"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:layout_constraintEnd_toEndOf="@+id/body_text_view"
+                            app:layout_constraintStart_toStartOf="@+id/body_text_view"
+                            app:layout_constraintTop_toBottomOf="@id/user_profile_image_view"
+                            app:spanCount="2" />
+
+                        <ImageView
+                            android:id="@+id/upvote_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/grid_1"
+                            app:layout_constraintEnd_toStartOf="@+id/comment_text_view"
+                            app:layout_constraintHorizontal_bias="0"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toStartOf="@+id/sender_text_view"
+                            app:layout_constraintTop_toBottomOf="@+id/body_text_view"
+                            app:setUpVoteDrawable="@{post.upVoted}" />
+
+                        <TextView
+                            android:id="@+id/vote_amount_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/grid_1"
+                            android:text="@{post.voteCount+ ``}"
+                            android:textAlignment="center"
+                            app:layout_constraintBottom_toBottomOf="@id/upvote_text_view"
+                            app:layout_constraintEnd_toStartOf="@+id/downvote_text_view"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/upvote_text_view"
+                            app:layout_constraintTop_toTopOf="@+id/upvote_text_view"
+                            tools:text="0" />
+
+                        <ImageView
+                            android:id="@+id/downvote_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/grid_1"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/grid_1"
+                            app:layout_constraintStart_toEndOf="@+id/upvote_text_view"
+                            app:layout_constraintTop_toTopOf="@+id/upvote_text_view"
+                            app:setDownVoteDrawable="@{post.downVoted}" />
+
+                        <TextView
+                            android:id="@+id/comment_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_insert_comment_post"
+                            android:drawablePadding="@dimen/grid_0_5"
+                            android:padding="@dimen/grid_1"
+                            android:text="@{post.commentsCount+``}"
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toStartOf="@id/bookmark_image_view"
+                            app:layout_constraintStart_toEndOf="@+id/downvote_text_view"
+                            app:layout_constraintTop_toTopOf="@+id/downvote_text_view"
+                            tools:text="0" />
+
+                        <ImageView
+                            android:id="@+id/delete_image_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:onClick="@{() -> listener.onPostDelete(post)}"
+                            android:padding="@dimen/grid_1"
+                            android:src="@drawable/ic_delete_post"
+                            android:text="@string/delete_button"
+                            android:visibility="@{post.user.id.equalsIgnoreCase(currentUserId) ? View.VISIBLE : View.INVISIBLE}"
+                            app:layout_constraintEnd_toEndOf="@+id/user_profile_image_view"
+                            app:layout_constraintHorizontal_bias="1"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintStart_toEndOf="@+id/bookmark_image_view"
+                            app:layout_constraintTop_toTopOf="@+id/bookmark_image_view" />
+
+                        <ImageView
+                            android:id="@+id/bookmark_image_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="@dimen/grid_1"
+                            android:tooltipText="@string/bookmark_button"
+                            app:layout_constraintEnd_toStartOf="@id/delete_image_view"
+                            app:layout_constraintStart_toEndOf="@+id/comment_text_view"
+                            app:layout_constraintTop_toTopOf="@+id/comment_text_view"
+                            tools:src="@drawable/ic_bookmark_post" />
+
+                        <LinearLayout
+                            android:id="@+id/category_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_1"
+                            android:background="?android:colorBackground"
+                            app:layout_constraintStart_toStartOf="@+id/upvote_text_view"
+                            app:layout_constraintTop_toBottomOf="@+id/upvote_text_view">
+
+                            <TextView
+                                android:id="@+id/category_button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="?attr/selectableItemBackground"
+                                android:clickable="true"
+                                android:drawablePadding="@dimen/grid_0_5"
+                                android:focusable="true"
+                                android:padding="@dimen/grid_1_5"
+                                android:text="@string/top_comment"
+                                android:textAllCaps="false"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                app:drawableEndCompat="@drawable/ic_arrow_down_post"
+                                app:drawableStartCompat="@drawable/ic_hot_post" />
+                        </LinearLayout>
+
+                        <include
+                            android:id="@+id/error_layout"
+                            layout="@layout/error_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_3"
+                            android:visibility="@{viewModel.comments.status == Status.ERROR || viewModel.comments.data.size() == 0? View.VISIBLE : View.GONE}"
+                            app:icon="@{@drawable/ic_no_comments_post}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/category_layout"
+                            app:message="@{`No comment`}" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/reply_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            android:paddingBottom="@dimen/bottom_app_bar_height2"
+                            app:commentsData="@{viewModel.comments.data}"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/category_layout"
+                            app:paddingBottomSystemWindowInsets="@{true}" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

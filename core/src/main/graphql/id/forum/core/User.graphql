@@ -1,0 +1,86 @@
+query UserAccount($accountId: String) {
+    user(query:{accountId: $accountId}){
+        ... UserDetails
+    }
+}
+
+query UserAccountCommunities($id: ObjectId) {
+    members(query: {user: {_id: $id}, isJoin: true}) {
+        ... UserCommunityDetails
+    }
+    bookmarks(query: {user: $id}) {
+        post {_id}
+    }
+    postUpVotes: postVotes(query: {user: $id, upVote: true}) {
+        post
+    }
+    postDownVotes: postVotes(query: {user: $id, upVote: false}) {
+        post
+    }
+    commentUpVotes: commentVotes(query: {user: $id, upVote: true}) {
+        comment
+    }
+    commentDownVotes: commentVotes(query: {user: $id, upVote: false}) {
+        comment
+    }
+
+}
+
+query User($id: ObjectId, $chatQuery: [UserQueryInput]) {
+    user(query:{_id: $id}){
+        ... UserDetails
+    }
+    chats(query:{users_in: $chatQuery}) {
+        ... ChatDetails
+    }
+    members(query: {user: {_id: $id}, isJoin: true}) {
+        ... UserCommunityDetails
+    }
+    posts(query: {user: {_id : $id}}, sortBy: CREATEDON_DESC) {
+        ... PostDetails
+    }
+
+}
+
+query ReceiverTokenNotif($recieverId: ObjectId) {
+    user(query:{_id: $recieverId}){
+        notificationToken
+    }
+}
+
+mutation UpdateSetupUser($id: String, $user: UserUpdateInput!) {
+    updateOneUser(query: {accountId: $id}, set: $user){
+        ... UserDetails
+    }
+}
+
+mutation UpdateUserById($id: ObjectId, $user: UserUpdateInput!) {
+    updateOneUser(query: {_id: $id}, set: $user){
+        ... UserDetails
+    }
+}
+
+mutation UpdateUserByAccountId($accountId: String, $user: UserUpdateInput!) {
+    updateOneUser(query: {accountId: $accountId}, set: $user){
+        ... UserDetails
+    }
+}
+
+fragment UserDetails on User{
+    _id
+    name
+    username
+    biodata
+    avatar
+    accountId
+    notificationToken
+    createdOn
+}
+
+fragment UserCommunityDetails on Member {
+    community {
+        _id
+        avatar
+        name
+    }
+}

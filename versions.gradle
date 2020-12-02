@@ -1,0 +1,116 @@
+ext.deps = [:]
+def versions = [:]
+versions.android_gradle_plugin = '4.1.0'
+versions.apollo = '2.4.2'
+versions.core_ktx = "1.3.2"
+versions.coroutines = "1.3.5"
+versions.constraint_layout = "2.0.2"
+versions.cropper = "2.8.0"
+versions.dynamicanimation = "1.0.0"
+versions.espresso = "3.3.0"
+versions.firebase_auth = "19.4.0"
+versions.firebase_messaging = "20.3.0"
+versions.firebase_storage = "19.2.0"
+versions.glide = "4.11.0"
+versions.google_services = "4.3.3"
+versions.gson = "2.8.6"
+versions.image_cropper = "2.8.0"
+versions.junit = "4.12"
+versions.kotlin = "1.4.10"
+versions.koin = "2.1.6"
+versions.lifecycle = "2.2.0"
+versions.loupe = "1.0.1"
+versions.mongodb = "4.5.0"
+versions.material = "1.3.0-alpha03"
+versions.navigation = "2.3.0"
+versions.okhttp_logging_interceptor = "4.9.0"
+versions.paging = "3.0.0-alpha09"
+versions.realm_gradle_plugin = '10.0.0-BETA.8'
+versions.support = "1.2.0"
+versions.work = "2.3.4"
+
+def deps = [:]
+
+def support = [:]
+support.app_compat = "androidx.appcompat:appcompat:$versions.support"
+support.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
+deps.support = support
+
+def apollo = [:]
+apollo.runtime = "com.apollographql.apollo:apollo-runtime:$versions.apollo"
+apollo.coroutines_support = "com.apollographql.apollo:apollo-coroutines-support:$versions.apollo"
+apollo.normalized_cache_sqlite = "com.apollographql.apollo:apollo-normalized-cache-sqlite:$versions.apollo"
+apollo.gradle_plugin = "com.apollographql.apollo:apollo-gradle-plugin:$versions.apollo"
+deps.apollo = apollo
+
+def espresso = [:]
+espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
+deps.espresso = espresso
+
+def lifecycle = [:]
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def coroutines = [:]
+coroutines.core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+coroutines.android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+deps.coroutines = coroutines
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlin = kotlin
+
+def firebase = [:]
+firebase.auth = "com.google.firebase:firebase-auth:$versions.firebase_auth"
+firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
+firebase.storage = "com.google.firebase:firebase-storage:$versions.firebase_storage"
+deps.firebase = firebase
+
+def navigation = [:]
+navigation.runtime = "androidx.navigation:navigation-runtime:$versions.navigation"
+navigation.runtime_ktx = "androidx.navigation:navigation-runtime-ktx:$versions.navigation"
+navigation.fragment = "androidx.navigation:navigation-fragment:$versions.navigation"
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui = "androidx.navigation:navigation-ui:$versions.navigation"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+navigation.dynamic_features_fragment = "androidx.navigation:navigation-dynamic-features-fragment:$versions.navigation"
+deps.navigation = navigation
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.dynamicanimation = "androidx.dynamicanimation:dynamicanimation:$versions.dynamicanimation"
+deps.material = "com.google.android.material:material:$versions.material"
+deps.junit = "junit:junit:$versions.junit"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.realm_gradle_plugin = "io.realm:realm-gradle-plugin:$versions.realm_gradle_plugin"
+deps.google_services = "com.google.gms:google-services:$versions.google_services"
+deps.koin = "org.koin:koin-androidx-viewmodel:$versions.koin"
+deps.gson = "com.google.code.gson:gson:$versions.gson"
+deps.okhttp3 = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp_logging_interceptor"
+deps.image_cropper = "com.theartofdev.edmodo:android-image-cropper:$versions.image_cropper"
+deps.loupe = "com.igreenwood:loupe:$versions.loupe"
+deps.cropper = "com.theartofdev.edmodo:android-image-cropper:$versions.cropper"
+deps.work = "androidx.work:work-runtime-ktx:$versions.work"
+deps.paging = "androidx.paging:paging-runtime-ktx:$versions.paging"
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 23
+build_versions.target_sdk = 30
+build_versions.build_tools = "28.0.3"
+ext.build_versions = build_versions
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+}
+
+ext.addRepos = this.&addRepos
+

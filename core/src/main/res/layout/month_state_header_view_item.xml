@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/month_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textColor="#BDBDBD"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Month" />
+
+        <View
+            android:id="@+id/horizontal_start"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/grid_1"
+            android:background="#BDBDBD"
+            app:layout_constraintBottom_toBottomOf="@id/month_msg"
+            app:layout_constraintEnd_toStartOf="@id/month_msg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/month_msg" />
+
+        <View
+            android:id="@+id/horizontal_end"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="@dimen/grid_1"
+            android:background="#BDBDBD"
+            app:layout_constraintBottom_toBottomOf="@id/month_msg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/month_msg"
+            app:layout_constraintTop_toTopOf="@id/month_msg" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

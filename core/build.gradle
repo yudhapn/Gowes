@@ -1,0 +1,115 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id "kotlin-kapt"
+    id 'kotlin-android-extensions'
+    id "com.apollographql.apollo"
+    id "realm-android"
+}
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+realm {
+    syncEnabled = true
+}
+
+apollo {
+    generateKotlinModels = true
+    customTypeMapping = [
+            "ObjectId": "kotlin.String",
+            "DateTime": "java.util.Date"
+    ]
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api deps.kotlin.stdlib
+    api deps.support.app_compat
+    api deps.support.core_ktx
+
+    // Apollo
+    api deps.apollo.runtime
+    api deps.apollo.coroutines_support
+    api deps.apollo.normalized_cache_sqlite
+
+    // Coroutines
+    api deps.coroutines.core
+    api deps.coroutines.android
+
+    // AndroidX
+    api deps.constraint_layout
+//    api "androidx.recyclerview:recyclerview:1.1.0"
+    api "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation deps.work
+    api deps.paging
+
+    // Firebase
+    api deps.firebase.auth
+    api deps.firebase.messaging
+    api deps.firebase.storage
+
+    // Glide
+    api deps.glide.runtime
+    api deps.glide.compiler
+
+    // Gson
+    api deps.gson
+
+    // Lifecycle
+    api deps.lifecycle.extensions
+    api deps.lifecycle.livedata_ktx
+
+    // Material Components
+    api deps.dynamicanimation
+    api deps.material
+
+    // Navigation
+    api deps.navigation.runtime_ktx
+    api deps.navigation.fragment_ktx
+    api deps.navigation.ui_ktx
+    api deps.navigation.dynamic_features_fragment
+
+    // OkHttp
+    api deps.okhttp3
+    // KoIn
+    api deps.koin
+
+    // Image Cropper
+    api deps.cropper
+
+    // Loupe
+    api deps.loupe
+
+}

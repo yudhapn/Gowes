@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="currentUserId"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="id.forum.community.presentation.CommunityViewModel" />
+
+        <variable
+            name="isPrivate"
+            type="Boolean" />
+
+        <variable
+            name="visible"
+            type="Integer" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/join_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{!(viewModel.community.status == Status.LOADING)}"
+            android:text="@string/join_button"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:goneIf="@{(viewModel.isAdmin() || viewModel.isMember()) || (!(viewModel.isAdmin() || viewModel.isMember()) &amp;&amp; isPrivate)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/request_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{!viewModel.isRequest()}"
+            android:text="@string/request_button"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:goneIf="@{(viewModel.isAdmin() || viewModel.isMember() || viewModel.isRequest()) || ((!viewModel.isAdmin() || !viewModel.isMember()) &amp;&amp; !isPrivate)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_button"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:goneIf="@{(viewModel.isAdmin() || viewModel.isMember() || !viewModel.isRequest()) || ((!viewModel.isAdmin() || !viewModel.isMember()) &amp;&amp; !isPrivate)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/leave_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="@{!(viewModel.community.status == Status.LOADING)}"
+            android:text="@string/leave_button"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:goneIf="@{!(viewModel.isAdmin() || viewModel.isMember())}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="receiver"
+            type="id.forum.core.user.domain.model.User" />
+
+        <variable
+            name="viewModel"
+            type="id.forum.chat.presentation.room.ChatRoomViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:colorBackground"
+            android:fillViewport="true">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/chat_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:paddingTopSystemWindowInsets="@{true}">
+
+                    <LinearLayout
+                        android:paddingVertical="@dimen/grid_1"
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/back_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_back_chat" />
+
+                        <ImageView
+                            android:id="@+id/avatar_image_view"
+                            android:layout_width="@dimen/grid_5"
+                            android:layout_height="@dimen/grid_5"
+                            android:layout_marginStart="8dp"
+                            android:scaleType="centerCrop"
+                            app:glideCircularCrop2="@{true}"
+                            app:glideSrc2="@{receiver.profile.avatar}" />
+
+                        <TextView
+                            android:id="@+id/name_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:text="@{receiver.userName}"
+                            android:textStyle="bold"
+                            tools:text="Bopung" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_chat_room"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        android:paddingTop="@dimen/grid_3"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintBottom_toTopOf="@id/bottom"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/toolbar"
+                        app:messagesData="@{viewModel.messages.data}"
+                        app:paddingTopSystemWindowInsets="@{true}"
+                        app:stackFromEnd="true"
+                        tools:listitem="@layout/item_list_chat_right_layout" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:marginBottomSystemWindowInsets="@{true}">
+
+                        <ImageButton
+                            android:id="@+id/btn_add_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/ic_add_image_chat"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/et_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:hint="Type a message..."
+                            app:layout_constraintBottom_toBottomOf="@id/btn_send"
+                            app:layout_constraintEnd_toStartOf="@id/btn_send"
+                            app:layout_constraintStart_toEndOf="@id/btn_add_image"
+                            app:layout_constraintTop_toTopOf="@id/btn_send" />
+
+                        <ImageButton
+                            android:id="@+id/btn_send"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/ic_send_chat"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

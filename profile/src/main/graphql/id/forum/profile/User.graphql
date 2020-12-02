@@ -1,0 +1,8 @@
+query User($userId: ObjectId) {
+    user(query:{_id: $userId}){
+        ... UserDetails
+    }
+    posts(query: {user: {_id : $userId}}, sortBy: CREATEDON_DESC) {
+        ... PostDetails
+    }
+}

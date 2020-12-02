@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="id.forum.core.data.Status" />
+
+        <variable
+            name="post_icon"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="community_icon"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="private_icon"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="currentUserId"
+            type="String" />
+
+        <variable
+            name="community"
+            type="id.forum.core.community.domain.model.Community" />
+
+        <variable
+            name="communityViewModel"
+            type="id.forum.community.presentation.CommunityViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/community_nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:paddingBottomSystemWindowInsets="@{true}"
+                app:paddingTopSystemWindowInsets="@{true}">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/email_card_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/grid_0_5"
+                    app:cardPreventCornerOverlap="false">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:paddingBottomSystemWindowInsets="@{true}">
+
+                        <ImageView
+                            android:id="@+id/iv_community"
+                            android:layout_width="@dimen/profile_image_size"
+                            android:layout_height="@dimen/profile_image_size"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="32dp"
+                            android:contentDescription="@string/email_sender_profile_content_desc"
+                            app:glideCircularCrop2="@{true}"
+                            app:glideSrc2="@{community.profile.avatar}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/avatar_0" />
+
+                        <TextView
+                            android:id="@+id/tv_community_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/grid_2"
+                            android:layout_marginEnd="@dimen/grid_1"
+                            android:text="@{community.profile.name}"
+                            android:textAppearance="@style/TextAppearance.Gowes.Body1"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/btn_edit"
+                            app:layout_constraintStart_toEndOf="@id/iv_community"
+                            app:layout_constraintTop_toTopOf="@id/iv_community"
+                            tools:text="BM Malang Raya" />
+
+                        <include
+                            android:id="@+id/btn_community"
+                            layout="@layout/community_button_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/grid_2"
+                            app:currentUserId="@{currentUserId}"
+                            app:isPrivate="@{community.private}"
+                            app:layout_constraintBottom_toTopOf="@+id/member_divider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:viewModel="@{communityViewModel}" />
+
+                        <TextView
+                            android:id="@+id/tv_location"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_0_5"
+                            android:layout_marginEnd="@dimen/grid_1"
+                            android:text="@{community.address.city + `, ` + community.address.province}"
+                            android:textAppearance="@style/TextAppearance.Gowes.Body2"
+                            app:drawableStartCompat="@drawable/ic_location"
+                            app:layout_constraintEnd_toStartOf="@+id/btn_edit"
+                            app:layout_constraintStart_toStartOf="@id/tv_community_name"
+                            app:layout_constraintTop_toBottomOf="@id/tv_community_name"
+                            tools:text="Malang, Indonesia" />
+
+                        <TextView
+                            android:id="@+id/tv_post_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_0_5"
+                            android:drawablePadding="@dimen/grid_0_5"
+                            android:gravity="center_vertical"
+                            android:text="@{community.posts.size() > 1 ? community.posts.size() + ` Posts` : community.posts.size() + ` Post`}"
+                            android:textAppearance="@style/TextAppearance.Gowes.Body3"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_post"
+                            app:layout_constraintStart_toStartOf="@id/tv_location"
+                            app:layout_constraintTop_toBottomOf="@id/tv_location"
+                            tools:text="349 Post" />
+
+                        <TextView
+                            android:id="@+id/tv_member_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/grid_2"
+                            android:drawablePadding="@dimen/grid_0_5"
+                            android:gravity="center_vertical"
+                            android:text="@{community.memberCount > 1 ? community.memberCount + ` Members` : community.memberCount + ` Member`}"
+                            android:textAppearance="@style/TextAppearance.Gowes.Body3"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_community"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_post_amount"
+                            app:layout_constraintStart_toEndOf="@id/tv_post_amount"
+                            app:layout_constraintTop_toTopOf="@id/tv_post_amount"
+                            tools:text="100 Members" />
+
+                        <TextView
+                            android:id="@+id/btn_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/grid_2"
+                            android:padding="@dimen/grid_1"
+                            android:text="@string/edit"
+                            android:textAllCaps="false"
+                            android:textColor="@color/text_selector"
+                            app:goneIf="@{!communityViewModel.isAdmin()}"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_community_name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/tv_community_name" />
+
+
+                        <TextView
+                            android:id="@+id/tv_bio_data"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_2"
+                            android:layout_marginEnd="@dimen/grid_2"
+                            android:text="@{community.profile.biodata}"
+                            android:textAppearance="@style/TextAppearance.Gowes.Body2"
+                            app:layout_constraintEnd_toStartOf="@+id/community_button"
+                            app:layout_constraintStart_toStartOf="@id/iv_community"
+                            app:layout_constraintTop_toBottomOf="@id/tv_post_amount"
+                            tools:text="Introvert" />
+
+                        <ImageView
+                            android:id="@+id/member_divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="@dimen/grid_2"
+                            android:layout_marginTop="@dimen/grid_2"
+                            android:background="@drawable/divider"
+                            app:backgroundTint="@color/color_on_surface_divider"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_bio_data" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/member_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:goneIf="@{community.private &amp;&amp; !(communityViewModel.isAdmin || communityViewModel.isMember)}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/member_divider">
+
+                            <TextView
+                                android:id="@+id/tv_head_member"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/community_member"
+                                android:textAppearance="@style/TextAppearance.Gowes.Body1"
+                                android:textStyle="bold"
+                                android:visibility="@{communityViewModel.community.status == Status.ERROR ? View.INVISIBLE : View.VISIBLE}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <include
+                                android:id="@+id/btn_show_all_member"
+                                layout="@layout/show_member_button_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:viewModel="@{communityViewModel}" />
+
+                            <include
+                                layout="@layout/error_state"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/grid_2"
+                                android:visibility="@{communityViewModel.community.status == Status.ERROR || communityViewModel.community.data.admins.size() == 0 ? View.VISIBLE : View.GONE}"
+                                app:icon="@{community_icon}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_head_member"
+                                app:message="@{`No member`}" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/member_recycler_view"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/grid_1"
+                                android:layout_marginStart="@dimen/grid_1"
+                                android:orientation="horizontal"
+                                android:overScrollMode="never"
+                                app:adminsData="@{community.admins}"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintBottom_toTopOf="@id/sender_divider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_head_member"
+                                app:membersData="@{community.members}" />
+
+                            <ImageView
+                                android:id="@+id/sender_divider"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginHorizontal="@dimen/grid_2"
+                                android:layout_marginTop="@dimen/grid_0_5"
+                                android:background="@drawable/divider"
+                                app:backgroundTint="@color/color_on_surface_divider"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <include
+                            goneIf="@{!community.private || (community.private &amp;&amp; (communityViewModel.isAdmin || communityViewModel.isMember))}"
+                            layout="@layout/error_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/grid_3"
+                            android:visibility="gone"
+                            app:icon="@{private_icon}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/member_layout"
+                            app:layout_constraintVertical_bias="0.4"
+                            app:message="@{`This community is private. \nYou should request to join`}" />
+
+                        <include
+                            layout="@layout/error_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{(communityViewModel.community.status == Status.ERROR || community.posts.size() == 0) &amp;&amp; !community.private? View.VISIBLE : View.GONE}"
+                            app:icon="@{post_icon}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/member_layout"
+                            app:layout_constraintVertical_bias="0.4"
+                            app:message="@{`No post`}" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never"
+                            android:paddingTop="@dimen/grid_0_25"
+                            android:paddingBottom="@dimen/bottom_app_bar_height2"
+                            app:goneIf="@{community.private &amp;&amp; !(communityViewModel.isAdmin || communityViewModel.isMember)}"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/member_layout"
+                            app:layout_constraintVertical_bias="0"
+                            app:paddingBottomSystemWindowInsets="@{true}" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

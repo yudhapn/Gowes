@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_appoint"
+        android:title="@string/appoint_admin_button" />
+    <item
+        android:id="@+id/menu_expel"
+        android:title="@string/expel_button" />
+</menu>
